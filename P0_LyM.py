@@ -114,14 +114,57 @@ def defvar(lista):
 
         if lista[1].lower().replace(":","") == "front":
            movimiento(numero)
+           return dentro()
 
         elif lista[1].lower().replace(":","")== "right":
-            vista = "left"  
+            if vista == "W":
+                myYpos -= int(casillas)
 
-        elif lista[1].lower().replace(":","") == "back ":
-             myXpos -= int(numero)
+                
+            elif vista == "N":
+                myXpos += int(casillas)
+            elif vista == "S":
+                myXpos -= int(casillas)
+                        
+            elif vista == "E":
+                myYpos += int(casillas)
+
+        elif lista[1].lower().replace(":","") == "back":
+            if vista == "W":
+                myXpos += int(casillas)
+
+                
+
+            
+            elif vista == "N":
+                myYpos += int(casillas)
+            elif vista == "S":
+                 myYpos -= int(casillas)
+                
+                        
+            elif vista == "E":
+                myXpos -= int(casillas)
+           
         elif lista[1].lower().replace(":","") =="left":
-                      vista = "S"
+            if vista == "W":
+                myYpos += int(casillas)
+
+                
+            
+            elif vista == "N":
+                myXpos -= int(casillas)
+
+                
+            elif vista == "S":
+                myXpos += int(casillas)
+
+                 
+                
+                        
+            elif vista == "E":
+                myYpos -= int(casillas)
+               
+                
                     
 def movimiento(casillas):
     if vista == "W":
@@ -131,7 +174,7 @@ def movimiento(casillas):
     elif vista == "S":
                 myYpos += int(casillas)
     elif vista == "E":
-                myYpos += int(casillas)
+                myXpos += int(casillas)
 
 
 def dentro():
