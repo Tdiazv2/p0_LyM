@@ -24,11 +24,11 @@ def lectura():
         linea.lower().replace("(", "").replace(")","")
         lista = linea.split(" ")
         if (lista[0] == "defvar"):
-            defvar()
+            command()
     
     codigo.close()
 
-def defvar(lista):
+def command(lista):
 
 
     if (lista[0] == "move"):
