@@ -23,8 +23,8 @@ def lectura():
         linea = codigo.readline()
         linea.lower().replace("(", "").replace(")","")
         lista = linea.split(" ")
-        if (lista[0] == "defvar"):
-            command()
+        
+        command(lista)
     
     codigo.close()
 
