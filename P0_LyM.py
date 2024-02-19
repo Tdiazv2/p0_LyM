@@ -44,7 +44,7 @@ def command(lista):
     if (lista[0] == "move"):
         casillas = lista[1]
         movimiento(casillas)
-        return dentro()
+        dentro()
     if (lista[0]== "="):
         variables[lista[1]]= lista[2]
 
@@ -214,8 +214,8 @@ def dentro():
 
     
     if (myXpos > 0) and (myXpos <= dimx) and (myYpos >0)and (myYpos <= dimy):
-            return True
+            funciona = True
     else:
-            return False
+            funciona = False
 
 
