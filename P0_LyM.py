@@ -10,6 +10,9 @@ myBalloons = 0
 funciona = True
 Spaces = 0
 vista = "E"
+ballonsHere = 0
+chipsHere = 0
+
 
 def lectura():
 
@@ -17,8 +20,7 @@ def lectura():
     codigo = open("archivo", "r")
     linea = codigo.readline()
     
-    ballonsHere = 0
-    ChipsHere = 0
+    
     while(linea!="" and funciona == True):
         linea = codigo.readline()
         linea.lower().replace("(", "").replace(")","")
@@ -38,6 +40,23 @@ def command(lista):
         if (lista[2].lower() == "dim" or lista[2].lower() == "myxpos" or lista[2].lower() == "myypos" or lista[2].lower() == "mychips" or lista[2].lower() == "myballoons" or lista[2].lower() == "balloonshere" or lista[2].lower() == "chipshere" or lista[2].lower() == "spaces" or int(lista[2]) == int):
             
             variables[lista[1]] = lista[2]
+            if lista[2].lower() == "myxpos":
+                  myXpos = lista[2]
+            elif lista[2].lower() == "myypos":
+                  myYpos = lista[2]
+            elif lista[2].lower() == "dim":
+                  dim = lista[2]
+            elif lista[2].lower() == "mychips":
+                  myChips = lista[2]
+            elif lista[2].lower() == "myballoons":
+                  myBalloons = lista[2]
+            elif lista[2].lower() == "balloonshere":
+                  ballonsHere = lista[2]
+            elif lista[2].lower() == "chipshere":
+                  chipsHere = lista[2]
+            elif lista[2].lower() == "spaces":
+                  Spaces = lista[2]
+
         else:
             funciona = False
         
@@ -95,27 +114,34 @@ def command(lista):
             soltar = lista[1].lower().replace(":","")
             if soltar == "ballons":
                 try:
-                       myBalloons -= variables[lista[2]]
+                       variables["myballoons"] -= variables[lista[2]]
                 except:
-                       myBalloons -= lista[2]
+                       variables["myballoons"] -= lista[2]
+                if variables["myballoons"] <0:
+                      funciona = False
             elif soltar =="chips":
                 try:
-                       myChips -= variables[lista[2]]
+                       variables["myballoons"] -= variables[lista[2]]
                 except:
-                       myChips -= lista[2]
+                       variables["mychips"] -= lista[2]
+                if variables["mychips"] <0:
+                      funciona = False
+                
+
+                
                    
     if lista[0].lower() == "pick":
             soltar = lista[1].lower().replace(":","")
             if soltar == "ballons":
                 try:
-                       myBalloons += variables[lista[2]]
+                       variables["myballoons"] += variables[lista[2]]
                 except:
-                       myBalloons += lista[2]
+                       variables["myballoons"] += lista[2]
             elif soltar =="chips":
                 try:
-                       myChips += variables[lista[2]]
+                       variables["mychips"] += variables[lista[2]]
                 except:
-                       myChips += lista[2] 
+                       variables["mychips"] += lista[2] 
     if lista[0].lower() == "move-dir":
         try:
             numero = variables[lista[2]]
@@ -124,7 +150,7 @@ def command(lista):
 
         if lista[1].lower().replace(":","") == "front":
            movimiento(numero)
-           return dentro()
+           dentro()
 
         elif lista[1].lower().replace(":","")== "right":
             if vista == "W":
