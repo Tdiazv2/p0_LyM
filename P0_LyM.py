@@ -7,7 +7,7 @@ myXpos = 1
 myYpos = 1
 myChips = 0
 myBalloons = 0
-
+funciona = True
 Spaces = 0
 vista = "E"
 
@@ -16,7 +16,7 @@ def lectura():
     
     codigo = open("archivo", "r")
     linea = codigo.readline()
-    funciona = True
+    
     ballonsHere = 0
     ChipsHere = 0
     while(linea!="" and funciona == True):
@@ -27,10 +27,20 @@ def lectura():
         command(lista)
     
     codigo.close()
+    if funciona:
+        print("yes")
+    else:
+        print("no")
 
 def command(lista):
 
-
+    if lista[0].lower() == "defvar":
+        if (lista[2].lower() == "dim" or lista[2].lower() == "myxpos" or lista[2].lower() == "myypos" or lista[2].lower() == "mychips" or lista[2].lower() == "myballoons" or lista[2].lower() == "balloonshere" or lista[2].lower() == "chipshere" or lista[2].lower() == "spaces" or int(lista[2]) == int):
+            
+            variables[lista[1]] = lista[2]
+        else:
+            funciona = False
+        
     if (lista[0] == "move"):
         casillas = lista[1]
         movimiento(casillas)
@@ -157,15 +167,38 @@ def command(lista):
                 
             elif vista == "S":
                 myXpos += int(casillas)
-
-                 
-                
-                        
+    
             elif vista == "E":
                 myYpos -= int(casillas)
-               
+    if lista[0].lower() == "run-dirs":
+        vistaAntes = vista
+        for i in lista[1:len(lista) - 1]:
+            vista = i
+            movimiento(1)
+        vista = vistaAntes 
+    if lista[0].lower() == "move-face":
+        vista = lista[2]
+        if(int(lista[1]) is int):
+            movimiento(int(lista[1]))
+        elif(variables[lista[1]] is int):
+            movimiento(variables[lista[1]])
+    if lista[0].lower() == "if":
+        if not (lista[1].lower() == "facing?" or lista[1].lower() == "blocked?" or lista[1].lower() == "can-put?" or lista[1].lower() == "can-pick?" or lista[1].lower() == "can-move?" or lista[1].lower() == "iszero()" or lista[1].lower() == "not"):
+            funciona = False
+            if not (lista[2].lower() == "facing?" or lista[2].lower() == "blocked?" or lista[2].lower() == "can-put?" or lista[2].lower() == "can-pick?" or lista[2].lower() == "can-move?" or lista[2].lower() == "iszero()" or lista[2].lower() == "not"):
+                funciona = False
                 
+    if lista[0].lower() == "loop":
+        if not (lista[1].lower() == "facing?" or lista[1].lower() == "blocked?" or lista[1].lower() == "can-put?" or lista[1].lower() == "can-pick?" or lista[1].lower() == "can-move?" or lista[1].lower() == "iszero()" or lista[1].lower() == "not"):
+            funciona = False
+        
+    if lista[0].lower() == "repeat":
+        if not (lista[1].lower() == "facing?" or lista[1].lower() == "blocked?" or lista[1].lower() == "can-put?" or lista[1].lower() == "can-pick?" or lista[1].lower() == "can-move?" or lista[1].lower() == "iszero()" or lista[1].lower() == "not"):
+            funciona = False
                     
+    if lista[0].lower() == "defun":
+        variables[lista[2]] == "0"
+        
 def movimiento(casillas):
     if vista == "W":
             myXpos -= int(casillas)
